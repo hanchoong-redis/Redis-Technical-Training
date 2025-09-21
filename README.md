@@ -18,6 +18,10 @@ Convert the provided transcript into **clean, readable Markdown**.
 * **Focus only on technical content.**
   * No filler, no personality, no commentary.
   * No suggestions, no anecdotes, no unverified facts.
+  * Use explanations from the transcript to contextualize each command.
+   * [ORIGINAL TEXT] In our example today, we'll be using Lists to represent a radio station's playlist. Each playlist is effectively a queue. We'll learn how to add and remove songs, how to view the next five songs, and how to see how many songs we have left to play. For our radio station, we'll keep a Redis List called playlist. Each element in our List will be the ID of a song. When adding new elements, we say that we're pushing them onto the List. We push elements onto the right-hand side of the List using the RPUSH command.
+   * [IMPROVED TEXT] We’ll model a radio station playlist as a Redis List, treating it like a queue. Each element is a song ID. Songs are added to the right side with `RPUSH`, removed from the left with `LPOP`, and we can check upcoming songs or count how many remain with `LRANGE` and `LLEN`.
+
 * **Do not omit details. Do not delete or compress content.**
 * **Apply grammar/spelling corrections only if needed.**
 * **All responses must be wrapped in a fenced block starting with ```markdown and ending with ```**.
@@ -109,12 +113,29 @@ Hello. Thanks for tuning in to KRDS, Redis' number one hit station. Join me for 
 
 ## Redis Lists Explained - [Link to Video](https://youtu.be/202yxNkUJyE)
 
-### Checking Playlist Length with LLEN
+A Redis List is an ordered sequence of strings, comparable to:
+
+- Java `ArrayList`
+- JavaScript `Array`
+- Python `list`
+
+Lists can be used to implement stacks and queues.  
+In this example, a Redis List models a radio station's playlist queue.
+
+### Example:
+We’ll model a radio station playlist as a Redis List, treating it like a queue. Each element is a song ID. Songs are added to the right side with `RPUSH`, removed from the left with `LPOP`, and we can check upcoming songs or count how many remain with `LRANGE` and `LLEN`.
+
+### Adding Songs with RPUSH
+
+We add songs by pushing their IDs to the playlist. For example, Phil Collins’ Sussudio (Song ID: 25) and Sade’s Smooth Operator (Song ID: 71) are queued with:
 
 ```python
-# get number of elements in playlist
-length = r.execute_command("LLEN", "playlist")
-print("Songs left:", length)
+# push elements to the right-hand side of the playlist
+r.execute_command("RPUSH", "playlist", 25)
+r.execute_command("RPUSH", "playlist", 71)
+
+# verify list length
+print("Playlist length:", r.execute_command("LLEN", "playlist"))
 ````
 
 > **Sidenote**
