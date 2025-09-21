@@ -15,6 +15,7 @@ Convert the provided transcript into **clean, readable Markdown**.
 * **Do not omit details. Do not delete or compress content.**
 * **Apply grammar/spelling corrections only if needed.**
 * **All responses must be wrapped in a fenced block starting with ```markdown and ending with ```**.
+* **ALL CITATIONS MUST BE MARKDOWN FORMATTED ie. [DESCRIPTION OR NAME OF CITATION](CITATION LINK)**
 
 ### Structure:
 
@@ -26,7 +27,7 @@ Convert the provided transcript into **clean, readable Markdown**.
    Do not use --- to separate sections. Section separation is done using Python code blocks.
 3. **Code Blocks**:
 
-   * Place Redis command examples inside fenced Python code blocks.
+   * Use fenced Python code blocks with this format. All Redis commands must be converted to this format:  
    * Format as:
 
      ```python
@@ -81,6 +82,23 @@ Convert the provided transcript into **clean, readable Markdown**.
 * ❌ “If you like, I can produce a cheat sheet…” optional expansions.
 * ❌ Any editorializing, summarizing, or suggesting.
 
----
+### Sources
 
-Transcript:
+At the end of every article or transcript conversion, include a **comprehensive bibliography** of all references used. This section must:
+
+* List **all citations referenced inline** throughout the document.
+* Be formatted as a **Markdown bulleted list**.
+* Contain the **exact title of the page or source**, followed by the type of source (e.g., *Docs - Redis*), and the **direct URL**.
+* Maintain the order of **appearance in the text**.
+
+#### Example:
+
+- [TTL | Docs - Redis](https://redis.io/docs/latest/commands/ttl/?utm_source=chatgpt.com)  
+- [Write-behind caching | Docs - Redis](https://redis.io/docs/latest/operate/oss_and_stack/stack-with-enterprise/gears-v1/python/recipes/write-behind/?utm_source=chatgpt.com)  
+- [HSCAN | Docs - Redis](https://redis.io/docs/latest/commands/hscan/?utm_source=chatgpt.com)  
+
+
+## Transcript:
+
+```
+```
